@@ -54,7 +54,7 @@ object Warehouse:
   private case class WarehouseImpl() extends Warehouse:
     private var _itemList: List[Item] = Nil()
     def store(item: Item): Unit =
-      _itemList = List.append(_itemList, Cons(item, Nil()))
+      _itemList = Cons(item, _itemList)
     def searchItems(tag: String): List[Item] =
       List.filter(_itemList)(item => List.contains(item.tags, tag))
     def retrieve(code: Int): Option[Item] =
