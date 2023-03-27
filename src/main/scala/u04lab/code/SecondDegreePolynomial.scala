@@ -12,7 +12,7 @@ trait SecondDegreePolynomial:
 object SecondDegreePolynomial:
   def apply(secondDegree: Double, firstDegree: Double, constant: Double): SecondDegreePolynomial =
     SecondDegreePolynomialImpl(constant, firstDegree, secondDegree)// Fill here
-  private class SecondDegreePolynomialImpl(override val constant: Double,
+  private case class SecondDegreePolynomialImpl(override val constant: Double,
                                    override val firstDegree: Double,
                                    override val secondDegree: Double) extends SecondDegreePolynomial:
     override def +(polynomial: SecondDegreePolynomial): SecondDegreePolynomial = polynomial match
@@ -32,8 +32,10 @@ object SecondDegreePolynomial:
 @main def testEqualAndString(): Unit =
   val simplePolynomial = SecondDegreePolynomial(1.0, 0, 3)
   val anotherPolynomial = SecondDegreePolynomial(0.0, 1, 0.0)
+  val yetAnotherPolynomial = SecondDegreePolynomial(1.0, 0, 3)
   println(simplePolynomial.toString)
   println(simplePolynomial.equals(anotherPolynomial))
+  println(simplePolynomial.equals(yetAnotherPolynomial))
 
 
 /** Hints:
