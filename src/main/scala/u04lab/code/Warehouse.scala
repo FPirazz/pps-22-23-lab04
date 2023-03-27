@@ -1,5 +1,6 @@
 package u04lab.code
-import List.*
+import u04lab.code.List.*
+import u04lab.code.List
 trait Item {
   def code: Int
   def name: String
@@ -7,12 +8,16 @@ trait Item {
 }
 
 object Item:
-  def apply(code: Int, name: String, tags: List[String] = List.empty): Item = ???
+  def apply(code: Int, name: String, tags: List[String] = List.empty): Item =
+    ItemImpl(code, name, tags)
+  private case class ItemImpl(override val code: Int,
+                              override val name: String,
+                              override val tags: List[String]) extends Item
 
 /**
  * A warehouse is a place where items are stored.
  */
-trait Warehouse {
+trait Warehouse:
   /**
    * Stores an item in the warehouse.
    * @param item the item to store
@@ -41,11 +46,18 @@ trait Warehouse {
    * @return true if the warehouse contains an item with the given code, false otherwise
    */
   def contains(itemCode: Int): Boolean
-}
 
-object Warehouse {
+
+object Warehouse:
   def apply(): Warehouse = ???
-}
+  private case class WarehouseImpl() extends Warehouse:
+    private val _itemList: List[Item] = Nil()
+    def store(item: Item): Unit = ???
+    def searchItems(tag: String): List[Item] = ???
+    def retrieve(code: Int): Option[Item] = ???
+    def remove(item: Item): Unit = ???
+    def contains(itemCode: Int): Boolean = ???
+
 
 @main def mainWarehouse(): Unit =
   val warehouse = Warehouse()
