@@ -9,9 +9,15 @@ trait SecondDegreePolynomial:
   def +(polynomial: SecondDegreePolynomial): SecondDegreePolynomial
   def -(polynomial: SecondDegreePolynomial): SecondDegreePolynomial
 
-
 object SecondDegreePolynomial:
-  def apply(secondDegree: Double, firstDegree: Double, constant: Double): SecondDegreePolynomial = ??? // Fill here
+  def apply(secondDegree: Double, firstDegree: Double, constant: Double): SecondDegreePolynomial =
+    SecondDegreePolynomialImpl(constant, firstDegree, secondDegree)// Fill here
+  private class SecondDegreePolynomialImpl(override val constant: Double,
+                                   override val firstDegree: Double,
+                                   override val secondDegree: Double) extends SecondDegreePolynomial:
+    override def +(polynomial: SecondDegreePolynomial): SecondDegreePolynomial = ???
+    override def -(polynomial: SecondDegreePolynomial): SecondDegreePolynomial = ???
+
 
 @main def checkComplex(): Unit =
   val simplePolynomial = SecondDegreePolynomial(1.0, 0, 3)
@@ -21,6 +27,12 @@ object SecondDegreePolynomial:
   println((sum, sum.secondDegree, sum.firstDegree, sum.constant)) // 1.0 * X^2 + 1.0 * X + 3.0
   val multipleOperations = fullPolynomial - (anotherPolynomial + simplePolynomial)
   println((multipleOperations, multipleOperations.secondDegree, multipleOperations.firstDegree, multipleOperations.constant)) // 2.0 * X^2 + 1.0 * X + 2.0
+
+@main def testSum(): Unit =
+  val simplePolynomial = SecondDegreePolynomial(1.0, 0, 3)
+  val anotherPolynomial = SecondDegreePolynomial(0.0, 1, 0.0)
+  val sum = simplePolynomial + anotherPolynomial
+  println(simplePolynomial + anotherPolynomial)
 
 /** Hints:
   *   - implement SecondDegreePolynomial with a SecondDegreePolynomialImpl class, similar to PersonImpl in slides
