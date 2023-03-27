@@ -57,7 +57,8 @@ object Warehouse:
       _itemList = List.append(_itemList, Cons(item, Nil()))
     def searchItems(tag: String): List[Item] =
       List.filter(_itemList)(item => List.contains(item.tags, tag))
-    def retrieve(code: Int): Option[Item] = ???
+    def retrieve(code: Int): Option[Item] =
+      List.find(_itemList)(item => item.code == code)
     def remove(item: Item): Unit = ???
     def contains(itemCode: Int): Boolean =
       !List.filter(_itemList)(item => item.code == itemCode).equals(List.empty)
@@ -79,7 +80,7 @@ object Warehouse:
   println(warehouse.searchItems("notebook")) // List(dellXps, dellInspiron)
   println(warehouse.retrieve(11)) // None
   println(warehouse.retrieve(dellXps.code)) // Some(dellXps)
-  println(warehouse.remove(dellXps)) // side effect, remove dell xps from the warehouse
+  warehouse.remove(dellXps)// side effect, remove dell xps from the warehouse
   println(warehouse.retrieve(dellXps.code)) // None
 
 /** Hints:
