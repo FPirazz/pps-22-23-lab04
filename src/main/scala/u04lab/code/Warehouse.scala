@@ -59,7 +59,8 @@ object Warehouse:
       List.filter(_itemList)(item => List.contains(item.tags, tag))
     def retrieve(code: Int): Option[Item] =
       List.find(_itemList)(item => item.code == code)
-    def remove(item: Item): Unit = ???
+    def remove(item: Item): Unit =
+      _itemList = List.remove(_itemList)(itemInList => itemInList.equals(item))
     def contains(itemCode: Int): Boolean =
       !List.filter(_itemList)(item => item.code == itemCode).equals(List.empty)
 
